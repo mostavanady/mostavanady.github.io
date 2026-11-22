@@ -1,7 +1,377 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>مصطفى نادي · تصميم جرافيك</title>  <script type="module" crossorigin src="./portfolio-d396b764d2.js"></script>
-  <link rel="stylesheet" crossorigin href="./index-BF07qhrR.css">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>مصطفى نادي · تصميم جرافيك</title>
+<meta name="description" content="معرض أعمال مصطفى نادي — هويات بصرية وتصميمات سوشيال ميديا."/>
+<style>
+@font-face{font-family:PortfolioCairo;src:url(./Cairo-gF84A2Tc.ttf) format("truetype");font-weight:200 1000;font-display:swap}
+:root{
+  --paper:#fdfcfb; --paper-2:#f5f1ec; --ink:#4d3533; --ink-2:rgba(77,53,51,.62);
+  --hair:rgba(77,53,51,.12); --accent:#c2571f; --accent-soft:rgba(194,87,31,.12);
+  --frame:#ffffff;
+  --shadow-1:0 2px 5px rgba(77,53,51,.08),0 9px 12px rgba(77,53,51,.07),0 24px 18px rgba(77,53,51,.05),0 44px 26px rgba(77,53,51,.03);
+  --shadow-2:0 4px 8px rgba(77,53,51,.10),0 16px 22px rgba(77,53,51,.12),0 40px 34px rgba(77,53,51,.10),0 70px 44px rgba(77,53,51,.06);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:PortfolioCairo,system-ui,sans-serif; background:var(--paper); color:var(--ink);
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:#fff}
+img{display:block;max-width:100%}
+a{color:inherit}
+
+/* ---------- preloader ---------- */
+#loader{position:fixed;inset:0;z-index:200;background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;
+  transition:transform .9s var(--ease);}
+#loader.done{transform:translateY(-101%)}
+#loader .l-name{font-size:clamp(34px,7vw,72px);font-weight:1000;letter-spacing:-.5px;
+  opacity:0;animation:lIn .8s var(--ease) .1s forwards}
+#loader .l-bar{width:min(240px,50vw);height:2px;background:rgba(253,252,251,.2);overflow:hidden;border-radius:2px}
+#loader .l-bar i{display:block;height:100%;width:0;background:var(--paper);animation:lBar 1s var(--ease) .15s forwards}
+@keyframes lIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes lBar{to{width:100%}}
+
+/* ---------- cursor ---------- */
+#cursor,#cursor-dot{position:fixed;top:0;left:0;pointer-events:none;z-index:150;border-radius:50%;
+  opacity:0;transition:opacity .3s}
+#cursor{width:44px;height:44px;border:1.5px solid var(--ink);transform:translate(-50%,-50%);
+  transition:width .35s var(--ease),height .35s var(--ease),opacity .3s,border-color .3s,background-color .3s}
+#cursor-dot{width:6px;height:6px;background:var(--accent);transform:translate(-50%,-50%)}
+#cursor.grow{width:88px;height:88px;background:rgba(253,252,251,.9);mix-blend-mode:difference;border-color:transparent}
+@media(pointer:coarse){#cursor,#cursor-dot{display:none}}
+
+/* ---------- progress ---------- */
+#progress{position:fixed;top:0;right:0;left:0;height:3px;z-index:120;background:transparent}
+#progress i{display:block;height:100%;width:0;background:var(--accent)}
+
+/* ---------- header ---------- */
+header{position:fixed;top:0;right:0;left:0;z-index:110;display:flex;align-items:center;justify-content:space-between;
+  padding:18px clamp(18px,4vw,44px);transition:background .4s,box-shadow .4s,padding .4s}
+header.scrolled{background:rgba(253,252,251,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:0 1px 0 var(--hair);padding-top:12px;padding-bottom:12px}
+.h-name{font-weight:1000;font-size:19px}
+.h-contact{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;text-decoration:none;
+  border:1.5px solid var(--ink);border-radius:999px;padding:7px 16px;transition:background .3s,color .3s}
+.h-contact:hover{background:var(--ink);color:var(--paper)}
+
+/* ---------- hero ---------- */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative;
+  padding:110px clamp(18px,5vw,64px) 40px;overflow:hidden;
+  background:
+    radial-gradient(60% 50% at 85% 15%,var(--accent-soft),transparent 70%),
+    radial-gradient(45% 40% at 10% 90%,rgba(194,87,31,.08),transparent 70%),
+    var(--paper)}
+.hero-kicker{font-size:clamp(14px,1.6vw,18px);font-weight:800;color:var(--accent);margin-bottom:6px;
+  opacity:0;transform:translateY(20px);animation:riseIn .9s var(--ease) .95s forwards}
+.hero-name{font-size:clamp(64px,15.5vw,220px);font-weight:1000;line-height:.95;letter-spacing:-2px;
+  display:flex;flex-wrap:wrap;gap:0 .18em}
+.hero-name .w{display:inline-block;opacity:0;transform:translateY(110%) rotate(4deg);
+  animation:riseIn 1.1s var(--ease) forwards}
+.hero-name .w:nth-child(1){animation-delay:1s}
+.hero-name .w:nth-child(2){animation-delay:1.12s;color:transparent;-webkit-text-stroke:2.5px var(--ink)}
+@keyframes riseIn{to{opacity:1;transform:none}}
+.hero-sub{margin-top:38px;font-size:clamp(17px,2.4vw,26px);font-weight:600;color:var(--ink-2);max-width:34ch;
+  opacity:0;transform:translateY(20px);animation:riseIn .9s var(--ease) 1.3s forwards}
+.hero-portrait{position:absolute;left:clamp(18px,6vw,80px);top:50%;width:clamp(150px,24vw,340px);
+  border-radius:18px;overflow:hidden;box-shadow:var(--shadow-2);border:8px solid var(--frame);
+  transform:translateY(-50%) rotate(-4deg);opacity:0;animation:pIn 1.2s var(--ease) 1.35s forwards;
+  will-change:transform}
+@keyframes pIn{from{opacity:0;transform:translateY(-30%) rotate(-10deg) scale(.9)}
+  to{opacity:1;transform:translateY(-50%) rotate(-4deg)}}
+.hero-portrait img{width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;left:clamp(140px,26vw,380px);top:22%;width:clamp(96px,11vw,150px);height:auto;
+  animation:spin 14s linear infinite;opacity:0;animation:spin 14s linear infinite,bIn .8s var(--ease) 1.6s forwards}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bIn{from{opacity:0;scale:.5}to{opacity:1;scale:1}}
+.scroll-hint{position:absolute;bottom:26px;right:50%;transform:translateX(50%);display:flex;flex-direction:column;
+  align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--ink-2);
+  opacity:0;animation:riseIn .8s var(--ease) 1.9s forwards}
+.scroll-hint svg{animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@media(max-width:720px){
+  .hero{padding-top:96px}
+  .hero-portrait{position:relative;left:auto;top:auto;transform:none;margin-top:34px;width:min(64vw,280px);
+    animation:pInM 1s var(--ease) 1.35s forwards}
+  @keyframes pInM{from{opacity:0;transform:rotate(-8deg) scale(.92)}to{opacity:1;transform:rotate(-3deg)}}
+  .hero-portrait{transform:rotate(-3deg)}
+  .badge{display:none}
+}
+
+/* ---------- marquee ---------- */
+.marquee{overflow:hidden;padding:16px 0;background:var(--ink);color:var(--paper);transform:rotate(-1.6deg) scale(1.02)}
+.marquee.rev{background:var(--paper);color:var(--ink);transform:rotate(1.2deg) scale(1.02);
+  border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink)}
+.mq-track{display:flex;gap:0;width:max-content;direction:ltr;animation:mq 26s linear infinite}
+.marquee.rev .mq-track{animation-direction:reverse}
+.mq-track span{white-space:nowrap;font-weight:1000;font-size:clamp(20px,3.4vw,40px);padding:0 .6em}
+.mq-track .dot{color:var(--accent)}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- exhibition ---------- */
+.exhibition{padding:clamp(60px,9vw,130px) clamp(16px,5vw,64px) 40px}
+.collection{margin-bottom:clamp(90px,14vw,190px);position:relative}
+.sec-head{display:flex;align-items:flex-end;gap:clamp(14px,3vw,34px);margin-bottom:clamp(26px,4vw,52px);flex-wrap:wrap}
+.sec-num{font-size:clamp(70px,12vw,170px);font-weight:1000;line-height:.8;color:transparent;
+  -webkit-text-stroke:2px var(--hair);-webkit-text-stroke:2px rgba(77,53,51,.28);user-select:none;will-change:transform}
+.sec-titles .kicker{display:block;font-size:clamp(13px,1.6vw,17px);font-weight:800;color:var(--accent);margin-bottom:4px}
+.sec-titles h2{font-size:clamp(30px,5.5vw,64px);font-weight:1000;letter-spacing:-.5px;line-height:1.05}
+.sec-story{font-size:clamp(14px,1.7vw,18px);font-weight:600;color:var(--ink-2);max-width:46ch;margin-top:8px}
+.sec-format{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--ink-2);
+  border:1px solid var(--hair);border-radius:999px;padding:4px 12px}
+.reveal{opacity:0;transform:translateY(56px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* art wall: varied collage */
+.artwall{display:flex;flex-wrap:wrap;align-items:flex-start;gap:clamp(14px,2.6vw,34px);will-change:transform}
+.art{position:relative;background:var(--frame);padding:clamp(7px,1vw,12px);border-radius:6px;
+  box-shadow:var(--shadow-1);transition:box-shadow .45s var(--ease),transform .45s var(--ease),z-index 0s;
+  flex:0 1 auto}
+.art img{border-radius:3px;width:100%;height:auto;transition:transform .6s var(--ease)}
+.art:hover{box-shadow:var(--shadow-2);z-index:5}
+.art:hover img{transform:scale(1.025)}
+.art figcaption{position:absolute;inset:auto 0 0 0;text-align:center;font-size:0}
+/* width rhythm */
+.art.w1{width:min(100%,760px)}
+.art.w2{width:min(46%,420px)}
+.art.w3{width:min(31%,320px)}
+.art.w4{width:min(58%,560px)}
+.art.w5{width:min(38%,360px)}
+@media(max-width:720px){
+  .art.w2,.art.w3,.art.w5{width:min(64%,340px)}
+  .art.w4{width:min(88%,560px)}
+  .art.w1{width:100%}
+}
+/* tilt variants */
+.tl-a{transform:rotate(-1.4deg)} .tl-b{transform:rotate(1.2deg)} .tl-c{transform:rotate(-.7deg)} .tl-d{transform:rotate(.8deg)}
+.tl-a:hover{transform:rotate(-1.4deg) translateY(-8px)} .tl-b:hover{transform:rotate(1.2deg) translateY(-8px)}
+.tl-c:hover{transform:rotate(-.7deg) translateY(-8px)} .tl-d:hover{transform:rotate(.8deg) translateY(-8px)}
+/* offset rhythm for museum feel */
+.off-1{margin-inline-start:auto}
+.off-2{margin-inline-start:8%}
+.off-3{margin-inline-start:2%}
+@media(max-width:720px){.off-1,.off-2,.off-3{margin-inline-start:auto;margin-inline-end:auto}}
+
+/* drift strips for carousel projects */
+.drift{overflow:hidden;direction:ltr;margin-inline:calc(-1*clamp(16px,5vw,64px));padding:26px 0}
+.drift-track{display:flex;gap:clamp(14px,2vw,26px);width:max-content;animation:driftMove var(--drift-t,46s) linear infinite}
+.drift:hover .drift-track{animation-play-state:paused}
+@keyframes driftMove{to{transform:translateX(-50%)}}
+.drift .art{width:clamp(220px,26vw,380px);flex:none}
+
+/* ---------- footer ---------- */
+footer{padding:70px clamp(18px,5vw,64px) 46px;text-align:center;position:relative}
+.f-big{font-size:clamp(40px,9vw,120px);font-weight:1000;letter-spacing:-1px;line-height:1;
+  opacity:0;transform:translateY(40px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.f-big.in{opacity:1;transform:none}
+.f-phone{display:inline-flex;align-items:center;gap:10px;margin-top:26px;font-size:clamp(18px,2.6vw,26px);font-weight:800;
+  text-decoration:none;border:2px solid var(--ink);border-radius:999px;padding:12px 30px;
+  transition:background .35s,color .35s,transform .35s var(--ease)}
+.f-phone:hover{background:var(--ink);color:var(--paper);transform:scale(1.04)}
+.f-note{margin-top:34px;font-size:14px;font-weight:600;color:var(--ink-2)}
+
+/* safety: never leave hero content hidden if animations are interrupted */
+body.settled .hero-kicker,body.settled .hero-name .w,body.settled .hero-sub,body.settled .hero-portrait,body.settled .scroll-hint,body.settled .badge{animation:none!important;opacity:1!important;transform:none}
+body.settled .hero-portrait{transform:translateY(-50%) rotate(-4deg)}
+@media(max-width:720px){body.settled .hero-portrait{transform:rotate(-3deg)}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  html{scroll-behavior:auto}
+}
+</style>
 </head>
-<body><div id="root"></div></body>
+<body>
+
+<div id="loader" aria-hidden="true">
+  <div class="l-name">مصطفى نادي</div>
+  <div class="l-bar"><i></i></div>
+</div>
+
+<div id="cursor"></div><div id="cursor-dot"></div>
+<div id="progress" aria-hidden="true"><i></i></div>
+
+<header id="site-header">
+  <span class="h-name">مصطفى نادي</span>
+  <a class="h-contact" href="tel:+201146956932"><span>للتواصل</span><bdi dir="ltr">+20 114 695 6932</bdi></a>
+</header>
+
+<section class="hero" id="top">
+  <p class="hero-kicker">مصمم جرافيك</p>
+  <h1 class="hero-name"><span class="w">مصطفى</span><span class="w">نادي</span></h1>
+  <p class="hero-sub">هويات بصرية وتصميمات سوشيال ميديا.</p>
+  <div class="hero-portrait" id="portrait"><img src="./portrait-Mlkns45n.jpg" alt="مصطفى نادي"/></div>
+  <svg class="badge" viewBox="0 0 120 120" aria-hidden="true">
+    <defs><path id="circ" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/></defs>
+    <circle cx="60" cy="60" r="60" fill="var(--accent)"/>
+    <circle cx="60" cy="60" r="30" fill="none" stroke="#fdfcfb" stroke-width="1.4" stroke-dasharray="3 5"/>
+    <text font-size="13.5" font-weight="800" fill="#fdfcfb" font-family="PortfolioCairo,sans-serif">
+      <textPath href="#circ">هوية بصرية • شعارات • سوشيال ميديا •</textPath>
+    </text>
+  </svg>
+  <div class="scroll-hint">
+    <span>اسكرول</span>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16m0 0l-6-6m6 6l6-6"/></svg>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="mq-track" id="mq1"></div></div>
+
+<main class="exhibition" aria-label="معرض الأعمال" id="gallery"></main>
+
+<div class="marquee rev" aria-hidden="true"><div class="mq-track" id="mq2"></div></div>
+
+<footer>
+  <div class="f-big" id="f-big">مصطفى نادي</div>
+  <a class="f-phone" href="tel:+201146956932"><span>للتواصل</span><bdi dir="ltr">+20 114 695 6932</bdi></a>
+  <p class="f-note">مصطفى نادي · تصميم جرافيك</p>
+</footer>
+
+<script>
+const DATA = {"projects":[{"id":"burger","title":"Burger Hub","category":"هوية بصرية وسوشيال ميديا","story":"شعار ولوحة ألوان وتطبيقات إعلانية بدرجات الأصفر والبني.","format":"عرض تقديمي من سبع صفحات","photos":["p45-1-BWflV8Vv.jpg","p45-2-C3rvq3K2.jpg","p45-3-Kyxeo5nC.jpg","p45-4-DEu4gOTe.jpg","p45-5-DUrSvF_I.jpg","p45-6-DRITUzNI.jpg","p45-7-CfOlUjn_.jpg"]},{"id":"posters","title":"بوسترات","category":"بوسترات وتجارب بصرية","story":"بوسترات مستقلة تجمع الخط العربي والكولاج والتكوين الطباعي.","format":"بوسترات مستقلة","photos":["a02-RbpmAoOi.jpg","a01-CkfH0pll.jpg","a33-DqPNkCgx.jpg","a30-BxJp0spm.jpg","a34-BaZ3dZfm.jpg","a31-Dx4bWwwc.jpg","a17-DWRwmdK_.jpg"]},{"id":"pt","title":"Be Well, Be Free","category":"شعار وتطبيقات بصرية","story":"شعار بالأبيض والأسود، مع تطبيقات على المطبوعات والهاتف والملابس.","format":"مجموعة تطبيقات للشعار","photos":["a22-CInR1_nE.jpg","a24-111wOjG7.jpg","a28-Buz3Ih0F.jpg","a26-CeX2zYpM.jpg"]},{"id":"marks","title":"شعارات","category":"مجموعة شعارات","story":"مجموعة مستقلة من الشعارات والرموز والحروف المختصرة.","format":"شعارات مستقلة","photos":["a04-DyL0mo8n.jpg","a44-wRYIcVD8.jpg","a42-CfCaT0AY.jpg","a16-C4v1Qu2W.jpg"]},{"id":"walking","title":"كاروسيل توعوي للأطفال","category":"كاروسيل توعوي","story":"سبع شرائح توعوية بهوية لونية موحدة وعناوين واضحة.","format":"كاروسيل من سبع شرائح","photos":["p46-1-BAdErb7N.jpg","p46-2-ByRH8O_i.jpg","p46-3-aFHEF3sl.jpg","p46-4-D18oYzFy.jpg","p46-5-Dh9tHY46.jpg","p46-6-DEraLM7H.jpg","p46-7-DEj0y0rb.jpg"]},{"id":"ultras","title":"UltrasTherapy","category":"شعار وتصميم سوشيال ميديا","story":"شعار بخطوط منحنية وتدرجات وردية، ومنشور لدعوة المتطوعين.","format":"شعار ومنشور","photos":["a03-C8en8lCx.jpg","a09-C1Jd3Jxv.jpg"]},{"id":"campus","title":"تصميمات جامعية","category":"مجموعة جامعية","story":"تصميمات ترحيب وتهنئة جامعية، مع عرض للمطبوعات.","format":"أعمال مستقلة ضمن مجموعة جامعية","photos":["a05-DspDVDfn.jpg","a18-BUEZRKuj.jpg","a19-VtS6MWNE.jpg","a35-BCWllhi2.jpg"]},{"id":"world","title":"اليوم العالمي للعلاج الطبيعي","category":"تشويق وإعلان مناسبة","story":"تصميم تشويقي وإعلان للمناسبة، بمعالجتين مختلفتين للصورة والخط.","format":"تصميمان للمناسبة","photos":["a21-C3n-o7B3.jpg","a06-DCfmrgbM.jpg"]},{"id":"covers","title":"أغلفة ومنشورات","category":"أغلفة ومنشورات","story":"أغلفة ومنشورات تعتمد على عنوان واضح ورموز مباشرة.","format":"أعمال مستقلة","photos":["a39-Dp5b7muh.jpg","a32-DKysWhcy.jpg"]},{"id":"medical","title":"تصميمات طبية","category":"تصميمات تعليمية وطبية","story":"تصميم يعرض المعلومة الطبية بالرسم التوضيحي والنص.","format":"تصميم مستقل","photos":["a07-ChCjGbl-.jpg"]},{"id":"uri","title":"URI · تهنئة رمضانية","category":"إعلانات ومناسبات","story":"تهنئة رمضانية بالفوانيس بدرجات الأخضر والذهبي.","format":"تصميم مناسبة","photos":["a10-8uPhrc7M.jpg"]},{"id":"ramadan","title":"تكوين رمضاني","category":"تكوين رمضاني","story":"حروف داخل هلال مزخرف بالذهبي على خلفية سوداء.","format":"تصميم مناسبة","photos":["a41-vynLfE4_.jpg"]}]};
+
+/* ---- build marquee ---- */
+const mqWords = ["هوية بصرية","سوشيال ميديا","شعارات","بوسترات","كاروسيل","إعلانات"];
+function fillMq(el){
+  let html = "";
+  for (let r=0;r<2;r++) for (let k=0;k<3;k++)
+    mqWords.forEach(w=>{ html += `<span>${w}</span><span class="dot">✦</span>`; });
+  el.innerHTML = html;
+}
+fillMq(document.getElementById("mq1"));
+fillMq(document.getElementById("mq2"));
+
+/* ---- build gallery ---- */
+const gallery = document.getElementById("gallery");
+const widthCycle = ["w1","w4","w2","w3","w5","w2","w1","w3","w4","w5","w3","w2"];
+const tiltCycle = ["tl-a","tl-b","tl-c","tl-d"];
+const offCycle  = ["off-3","off-1","off-2","off-3","off-1"];
+
+DATA.projects.forEach((p, i) => {
+  const sec = document.createElement("section");
+  sec.className = "collection";
+  sec.id = p.id;
+  const num = String(i+1).padStart(2,"0");
+  sec.innerHTML = `
+    <div class="sec-head">
+      <span class="sec-num" aria-hidden="true">${num}</span>
+      <div class="sec-titles">
+        <span class="kicker">${p.category}</span>
+        <h2>${p.title}</h2>
+        <p class="sec-story">${p.story}</p>
+        <span class="sec-format">${p.format}</span>
+      </div>
+    </div>`;
+  const useDrift = p.photos.length >= 6;
+  if (useDrift) {
+    const drift = document.createElement("div");
+    drift.className = "drift";
+    const track = document.createElement("div");
+    track.className = "drift-track";
+    track.style.setProperty("--drift-t", (p.photos.length*7)+"s");
+    const items = p.photos.concat(p.photos); /* duplicate for loop */
+    items.forEach((src, j) => {
+      track.appendChild(makeArt(src, `${p.title}، التصميم ${(j % p.photos.length)+1}`, tiltCycle[j%4], i>0));
+    });
+    drift.appendChild(track);
+    sec.appendChild(drift);
+  } else {
+    const wall = document.createElement("div");
+    wall.className = "artwall skew-target";
+    p.photos.forEach((src, j) => {
+      const w = widthCycle[(i + j) % widthCycle.length];
+      const art = makeArt(src, `${p.title}، التصميم ${j+1}`, tiltCycle[(i+j)%4], i>0);
+      art.classList.add(w, offCycle[(i+j)%offCycle.length]);
+      wall.appendChild(art);
+    });
+    sec.appendChild(wall);
+  }
+  gallery.appendChild(sec);
+});
+
+function makeArt(src, alt, tilt, lazy){
+  const fig = document.createElement("figure");
+  fig.className = `art reveal ${tilt}`;
+  const img = document.createElement("img");
+  img.src = "./"+src; img.alt = alt;
+  if (lazy) img.loading = "lazy";
+  fig.appendChild(img);
+  return fig;
+}
+
+/* ---- reveal on scroll ---- */
+const io = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+}, {threshold:.12, rootMargin:"0px 0px -6% 0px"});
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+const fbig = document.getElementById("f-big");
+new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){fbig.classList.add("in");o.disconnect()}})},{threshold:.4}).observe(fbig);
+
+/* ---- loader ---- */
+window.addEventListener("load", () => setTimeout(()=>document.getElementById("loader").classList.add("done"), 650));
+setTimeout(()=>document.getElementById("loader").classList.add("done"), 2600); /* safety */
+setTimeout(()=>document.body.classList.add("settled"), 3400); /* animation safety */
+
+/* ---- rAF loop: header, progress, parallax, velocity skew, cursor ---- */
+const header = document.getElementById("site-header");
+const bar = document.querySelector("#progress i");
+const portrait = document.getElementById("portrait");
+const nums = document.querySelectorAll(".sec-num");
+const walls = document.querySelectorAll(".skew-target");
+const cur = document.getElementById("cursor"), curDot = document.getElementById("cursor-dot");
+let mx=-100,my=-100, cx=-100, cy=-100, cursorOn=false;
+let lastY = window.scrollY, vel = 0;
+const fine = matchMedia("(pointer:fine)").matches;
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (fine && !reduced){
+  addEventListener("mousemove", e => { mx=e.clientX; my=e.clientY; if(!cursorOn){cursorOn=true;cur.style.opacity=1;curDot.style.opacity=1;} });
+  document.querySelectorAll(".art, .h-contact, .f-phone").forEach(el=>{
+    el.addEventListener("mouseenter",()=>cur.classList.add("grow"));
+    el.addEventListener("mouseleave",()=>cur.classList.remove("grow"));
+  });
+}
+
+function loop(){
+  const y = window.scrollY;
+  const dy = y - lastY; lastY = y;
+  vel += (dy - vel) * .12;
+
+  header.classList.toggle("scrolled", y > 40);
+  const h = document.documentElement.scrollHeight - innerHeight;
+  bar.style.width = (h>0 ? (y/h)*100 : 0) + "%";
+
+  if (!reduced){
+    /* hero portrait parallax */
+    if (y < innerHeight*1.2){
+      const p = y * .18;
+      const base = innerWidth > 720 ? "translateY(-50%) rotate(-4deg)" : "rotate(-3deg)";
+      portrait.style.transform = innerWidth > 720
+        ? `translateY(calc(-50% + ${p}px)) rotate(${-4 + y*.004}deg)` : base;
+    }
+    /* section numbers drift */
+    nums.forEach(n=>{
+      const r = n.parentElement.getBoundingClientRect();
+      const t = (r.top + r.height/2 - innerHeight/2) / innerHeight;
+      n.style.transform = `translateY(${t * -34}px)`;
+    });
+    /* velocity skew on walls */
+    const sk = Math.max(-2.2, Math.min(2.2, vel * .045));
+    walls.forEach(w => w.style.transform = `skewY(${sk}deg)`);
+  }
+
+  if (fine && !reduced && cursorOn){
+    cx += (mx-cx)*.2; cy += (my-cy)*.2;
+    cur.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+    curDot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+  }
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+</script>
+</body>
 </html>
