@@ -125,7 +125,7 @@ header.scrolled{background:rgba(253,252,251,.82);backdrop-filter:blur(12px);-web
 .sec-story{font-size:clamp(14px,1.7vw,18px);font-weight:600;color:var(--ink-2);max-width:46ch;margin-top:8px}
 .sec-format{display:inline-block;margin-top:10px;font-size:13px;font-weight:700;color:var(--ink-2);
   border:1px solid var(--hair);border-radius:999px;padding:4px 12px}
-.reveal{opacity:0;transform:translateY(56px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal{opacity:1;transition:transform .9s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 
 /* art wall: varied collage */
@@ -133,7 +133,7 @@ header.scrolled{background:rgba(253,252,251,.82);backdrop-filter:blur(12px);-web
 .art{position:relative;background:var(--frame);padding:clamp(7px,1vw,12px);border-radius:6px;
   box-shadow:var(--shadow-1);transition:box-shadow .45s var(--ease),transform .45s var(--ease),z-index 0s;
   flex:0 1 auto}
-.art img{border-radius:3px;width:100%;height:auto;opacity:0;background:linear-gradient(110deg,#eee8e0 30%,#f8f4ee 46%,#eee8e0 62%);background-size:220% 100%;animation:phMove 1.5s linear infinite;transition:opacity .5s var(--ease),transform .6s var(--ease)}
+.art img{border-radius:3px;width:100%;height:auto;opacity:1;background:linear-gradient(110deg,#eee8e0 30%,#f8f4ee 46%,#eee8e0 62%);background-size:220% 100%;animation:phMove 1.5s linear infinite;transition:opacity .5s var(--ease),transform .6s var(--ease)}
 .art.ready img{opacity:1;background:none;animation:none}
 @keyframes phMove{to{background-position:-220% 0}}
 .art:hover{box-shadow:var(--shadow-2);z-index:5}
@@ -234,6 +234,7 @@ body.settled .hero-portrait{transform:translateY(-50%) rotate(-4deg)}
 
 <script>
 const DATA = {"projects":[{"id":"burger","title":"Burger Hub","category":"هوية بصرية وسوشيال ميديا","story":"Logo, color palette, and ad designs in warm yellow and brown.","format":"عرض تقديمي من سبع صفحات","photos":["p45-1-BWflV8Vv.jpg","p45-2-C3rvq3K2.jpg","p45-3-Kyxeo5nC.jpg","p45-4-DEu4gOTe.jpg","p45-5-DUrSvF_I.jpg","p45-6-DRITUzNI.jpg","p45-7-CfOlUjn_.jpg"]},{"id":"posters","title":"بوسترات","category":"بوسترات وتجارب بصرية","story":"Standalone posters mixing Arabic type, collage, and print layouts.","format":"بوسترات مستقلة","photos":["a02-RbpmAoOi.jpg","a01-CkfH0pll.jpg","a33-DqPNkCgx.jpg","a30-BxJp0spm.jpg","a34-BaZ3dZfm.jpg","a31-Dx4bWwwc.jpg","a17-DWRwmdK_.jpg"]},{"id":"pt","title":"Be Well, Be Free","category":"شعار وتطبيقات بصرية","story":"Black and white logo applied to print, phone, and clothing.","format":"مجموعة تطبيقات للشعار","photos":["a22-CInR1_nE.jpg","a24-111wOjG7.jpg","a28-Buz3Ih0F.jpg","a26-CeX2zYpM.jpg"]},{"id":"marks","title":"شعارات","category":"مجموعة شعارات","story":"A set of standalone logos, symbols, and letter marks.","format":"شعارات مستقلة","photos":["a04-DyL0mo8n.jpg","a44-wRYIcVD8.jpg","a42-CfCaT0AY.jpg","a16-C4v1Qu2W.jpg"]},{"id":"walking","title":"كاروسيل توعوي للأطفال","category":"كاروسيل توعوي","story":"Seven awareness slides for kids with one color style and clear titles.","format":"كاروسيل من سبع شرائح","photos":["p46-1-BAdErb7N.jpg","p46-2-ByRH8O_i.jpg","p46-3-aFHEF3sl.jpg","p46-4-D18oYzFy.jpg","p46-5-Dh9tHY46.jpg","p46-6-DEraLM7H.jpg","p46-7-DEj0y0rb.jpg"]},{"id":"ultras","title":"UltrasTherapy","category":"شعار وتصميم سوشيال ميديا","story":"Curved-type logo in pink tones, plus a volunteer call post.","format":"شعار ومنشور","photos":["a03-C8en8lCx.jpg","a09-C1Jd3Jxv.jpg"]},{"id":"campus","title":"تصميمات جامعية","category":"مجموعة جامعية","story":"Welcome and congratulation designs for university, shown on print.","format":"أعمال مستقلة ضمن مجموعة جامعية","photos":["a05-DspDVDfn.jpg","a18-BUEZRKuj.jpg","a19-VtS6MWNE.jpg","a35-BCWllhi2.jpg"]},{"id":"world","title":"اليوم العالمي للعلاج الطبيعي","category":"تشويق وإعلان مناسبة","story":"A teaser and an announcement for the occasion, in two visual styles.","format":"تصميمان للمناسبة","photos":["a21-C3n-o7B3.jpg","a06-DCfmrgbM.jpg"]},{"id":"covers","title":"أغلفة ومنشورات","category":"أغلفة ومنشورات","story":"Covers and posts built on clear titles and direct symbols.","format":"أعمال مستقلة","photos":["a39-Dp5b7muh.jpg","a32-DKysWhcy.jpg"]},{"id":"medical","title":"تصميمات طبية","category":"تصميمات تعليمية وطبية","story":"A medical design that explains the idea with illustration and text.","format":"تصميم مستقل","photos":["a07-ChCjGbl-.jpg"]},{"id":"uri","title":"URI · تهنئة رمضانية","category":"إعلانات ومناسبات","story":"Ramadan greeting with lanterns in green and gold.","format":"تصميم مناسبة","photos":["a10-8uPhrc7M.jpg"]},{"id":"ramadan","title":"تكوين رمضاني","category":"تكوين رمضاني","story":"Lettering inside a golden crescent on a black background.","format":"تصميم مناسبة","photos":["a41-vynLfE4_.jpg"]}]};
+const DIMS = {"p45-1-BWflV8Vv.jpg":[2000,1125],"p45-2-C3rvq3K2.jpg":[2000,1125],"p45-3-Kyxeo5nC.jpg":[2000,1125],"p45-4-DEu4gOTe.jpg":[2000,1125],"p45-5-DUrSvF_I.jpg":[2000,1125],"p45-6-DRITUzNI.jpg":[2000,1125],"p45-7-CfOlUjn_.jpg":[2000,1125],"a02-RbpmAoOi.jpg":[1600,1600],"a01-CkfH0pll.jpg":[1350,1080],"a33-DqPNkCgx.jpg":[1350,1080],"a30-BxJp0spm.jpg":[904,1280],"a34-BaZ3dZfm.jpg":[1350,1080],"a31-Dx4bWwwc.jpg":[904,1280],"a17-DWRwmdK_.jpg":[1600,1142],"a22-CInR1_nE.jpg":[1280,960],"a24-111wOjG7.jpg":[1280,960],"a28-Buz3Ih0F.jpg":[1280,960],"a26-CeX2zYpM.jpg":[1280,960],"a04-DyL0mo8n.jpg":[1000,1000],"a44-wRYIcVD8.jpg":[1350,1080],"a42-CfCaT0AY.jpg":[1350,1080],"a16-C4v1Qu2W.jpg":[1024,1024],"p46-1-BAdErb7N.jpg":[500,500],"p46-2-ByRH8O_i.jpg":[500,500],"p46-3-aFHEF3sl.jpg":[500,500],"p46-4-D18oYzFy.jpg":[500,500],"p46-5-Dh9tHY46.jpg":[500,500],"p46-6-DEraLM7H.jpg":[500,500],"p46-7-DEj0y0rb.jpg":[500,500],"a03-C8en8lCx.jpg":[1254,1254],"a09-C1Jd3Jxv.jpg":[1600,992],"a05-DspDVDfn.jpg":[1280,1280],"a18-BUEZRKuj.jpg":[1050,1050],"a19-VtS6MWNE.jpg":[1200,900],"a35-BCWllhi2.jpg":[960,1280],"a21-C3n-o7B3.jpg":[1600,1142],"a06-DCfmrgbM.jpg":[1254,1254],"a39-Dp5b7muh.jpg":[853,1280],"a32-DKysWhcy.jpg":[1280,720],"a07-ChCjGbl-.jpg":[1600,839],"a10-8uPhrc7M.jpg":[1131,1599],"a41-vynLfE4_.jpg":[1600,1142]};
 
 /* ---- build marquee ---- */
 const mqWords = ["هوية بصرية","سوشيال ميديا","شعارات","بوسترات","كاروسيل","إعلانات"];
@@ -263,7 +264,7 @@ DATA.projects.forEach((p, i) => {
       <div class="sec-titles">
         <span class="kicker">${p.category}</span>
         <h2>${p.title}</h2>
-        <p class="sec-story">${p.story}</p>
+        <p class="sec-story" lang="en" dir="ltr">${p.story}</p>
         <span class="sec-format">${p.format}</span>
       </div>
     </div>`;
@@ -295,7 +296,6 @@ DATA.projects.forEach((p, i) => {
   gallery.appendChild(sec);
 });
 
-const DIMS = {"p45-1-BWflV8Vv.jpg":[2000,1125],"p45-2-C3rvq3K2.jpg":[2000,1125],"p45-3-Kyxeo5nC.jpg":[2000,1125],"p45-4-DEu4gOTe.jpg":[2000,1125],"p45-5-DUrSvF_I.jpg":[2000,1125],"p45-6-DRITUzNI.jpg":[2000,1125],"p45-7-CfOlUjn_.jpg":[2000,1125],"a02-RbpmAoOi.jpg":[1600,1600],"a01-CkfH0pll.jpg":[1350,1080],"a33-DqPNkCgx.jpg":[1350,1080],"a30-BxJp0spm.jpg":[904,1280],"a34-BaZ3dZfm.jpg":[1350,1080],"a31-Dx4bWwwc.jpg":[904,1280],"a17-DWRwmdK_.jpg":[1600,1142],"a22-CInR1_nE.jpg":[1280,960],"a24-111wOjG7.jpg":[1280,960],"a28-Buz3Ih0F.jpg":[1280,960],"a26-CeX2zYpM.jpg":[1280,960],"a04-DyL0mo8n.jpg":[1000,1000],"a44-wRYIcVD8.jpg":[1350,1080],"a42-CfCaT0AY.jpg":[1350,1080],"a16-C4v1Qu2W.jpg":[1024,1024],"p46-1-BAdErb7N.jpg":[500,500],"p46-2-ByRH8O_i.jpg":[500,500],"p46-3-aFHEF3sl.jpg":[500,500],"p46-4-D18oYzFy.jpg":[500,500],"p46-5-Dh9tHY46.jpg":[500,500],"p46-6-DEraLM7H.jpg":[500,500],"p46-7-DEj0y0rb.jpg":[500,500],"a03-C8en8lCx.jpg":[1254,1254],"a09-C1Jd3Jxv.jpg":[1600,992],"a05-DspDVDfn.jpg":[1280,1280],"a18-BUEZRKuj.jpg":[1050,1050],"a19-VtS6MWNE.jpg":[1200,900],"a35-BCWllhi2.jpg":[960,1280],"a21-C3n-o7B3.jpg":[1600,1142],"a06-DCfmrgbM.jpg":[1254,1254],"a39-Dp5b7muh.jpg":[853,1280],"a32-DKysWhcy.jpg":[1280,720],"a07-ChCjGbl-.jpg":[1600,839],"a10-8uPhrc7M.jpg":[1131,1599],"a41-vynLfE4_.jpg":[1600,1142]};
 function makeArt(src, alt, tilt, lazy){
   const fig = document.createElement("figure");
   fig.className = `art reveal ${tilt}`;
@@ -304,7 +304,7 @@ function makeArt(src, alt, tilt, lazy){
   if (d){ img.width = d[0]; img.height = d[1]; } /* reserve real space before load */
   img.decoding = "async";
   img.src = "./"+src; img.alt = alt;
-  if (lazy) img.loading = "lazy";
+  img.loading = "eager";
   const done = () => fig.classList.add("ready");
   if (img.complete && img.naturalWidth) done();
   img.addEventListener("load", done);
