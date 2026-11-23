@@ -44,19 +44,31 @@ section{position:relative;padding:96px 22px 40px;min-height:100svh;display:flex;
 #cover{justify-content:flex-end;min-height:100svh;padding-bottom:26px}
 #cover .rule-head{margin-bottom:0}
 .hero-stage{position:relative;flex:1;display:flex;align-items:center;justify-content:center;margin:18px 0;overflow:hidden}
-.hero-word{position:absolute;inset-inline:-4%;top:50%;transform:translateY(-50%);text-align:center;font-family:Anton,'Arial Narrow Bold',Arial,sans-serif;
-  font-size:clamp(64px,19vw,320px);line-height:.9;letter-spacing:.01em;color:transparent;
-  -webkit-text-stroke:1px rgba(255,255,255,.11);direction:ltr;user-select:none;pointer-events:none}
+.hero-geo{position:absolute;inset:0;direction:ltr;pointer-events:none}
+.hg-threads{position:absolute;inset:0;width:100%;height:100%}
+.hg-threads path{fill:none;stroke:rgba(255,255,255,.14);stroke-width:1.1}
+.hg-threads .t-a{stroke:rgba(232,160,42,.38)}
+.hg-threads .t-b{stroke:rgba(92,192,174,.32)}
+.hg-orb{position:absolute;border-radius:50%;filter:blur(70px)}
+.hg-o1{width:340px;height:340px;background:radial-gradient(circle,rgba(232,160,42,.30),transparent 70%);top:-8%;left:5%;animation:orbFloat 11s ease-in-out infinite}
+.hg-o2{width:300px;height:300px;background:radial-gradient(circle,rgba(92,192,174,.24),transparent 70%);bottom:-10%;right:7%;animation:orbFloat 13s ease-in-out infinite reverse}
+@keyframes orbFloat{50%{transform:translateY(-24px)}}
+.hg-ring{position:absolute;width:min(58svh,540px);height:min(58svh,540px);left:50%;top:50%;
+  border:1px dashed rgba(255,255,255,.15);border-radius:50%;animation:hgSpin 70s linear infinite}
+@keyframes hgSpin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.hg-frame{position:absolute;border:1px solid rgba(255,255,255,.20);--r:0deg;transform:rotate(var(--r));animation:fFloat 9s ease-in-out infinite}
+.hg-f1{width:200px;height:200px;left:11%;top:15%;--r:14deg}
+.hg-f2{width:120px;height:120px;right:13%;bottom:18%;border-color:rgba(92,192,174,.5);--r:-10deg;animation-direction:reverse}
+.hg-f3{width:66px;height:66px;right:21%;top:13%;background:rgba(232,160,42,.14);border-color:rgba(232,160,42,.5);--r:32deg;animation-duration:11s}
+@keyframes fFloat{50%{transform:rotate(var(--r)) translateY(-14px)}}
+.hg-front{position:absolute;width:150px;height:150px;right:13%;top:33%;z-index:3;border:1px solid rgba(255,255,255,.30);
+  transform:rotate(8deg);pointer-events:none;animation:fFloat2 10s ease-in-out infinite}
+@keyframes fFloat2{50%{transform:rotate(8deg) translateY(-10px)}}
 .hero-type{position:relative;z-index:2;text-align:center;padding:10px 0}
-.ht-kicker{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:26px;direction:ltr;
-  font:11px/1 Arial,sans-serif;letter-spacing:.3em;color:var(--dim)}
-.ht-kicker i{width:38px;height:1px;background:var(--line)}
-.ht-kicker .ht-star{width:15px;height:15px;color:#f4f3f0;flex:0 0 auto}
-.ht-name{margin:0;font-weight:900;font-size:clamp(100px,min(24vw,33svh),340px);line-height:1.04}
-.ht-name .l1{display:block;background:linear-gradient(180deg,#fff 25%,#8f8d88 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.ht-name .l2{display:block;color:#77756f;transform:translateX(-.55em);animation:htFloat 7s ease-in-out infinite}
-@keyframes htFloat{50%{transform:translateX(-.55em) translateY(10px)}}
-@media (prefers-reduced-motion:reduce){.ht-name .l2{animation:none}}
+.ht-name{margin:0;font-weight:900;font-size:clamp(52px,8.5vw,128px);line-height:1.15}
+.ht-name .l1{background:linear-gradient(180deg,#fff 25%,#8f8d88 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.ht-name .l2{color:#84827b;margin-inline-start:.32em}
+@media (prefers-reduced-motion:reduce){.hg-orb,.hg-ring,.hg-frame,.hg-front{animation:none}}
 /* ---------- about ---------- */
 #about .ghost{position:absolute;top:120px;inset-inline:0;text-align:center;font-weight:900;
   font-size:clamp(70px,15vw,220px);color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.09);line-height:1;pointer-events:none}
@@ -71,22 +83,27 @@ section{position:relative;padding:96px 22px 40px;min-height:100svh;display:flex;
 .chapter{background:radial-gradient(120% 80% at 85% 0%,rgba(var(--tint),.20),transparent 62%),var(--bg)}
 .ch-watermark{position:absolute;top:140px;inset-inline-end:8px;font-family:Anton,Arial,sans-serif;font-size:34vh;line-height:1;
   color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.07);pointer-events:none;direction:ltr}
-.ch-main{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;flex:1;padding:34px 0 26px}
+.ch-main{display:grid;grid-template-columns:.85fr 1.15fr;gap:26px;align-items:center;flex:1;padding:34px 0 26px}
 .ch-title{font-size:clamp(42px,7.6vw,104px);line-height:1.02;margin-bottom:20px}
 .ch-title.lat{font-family:Anton,'Arial Narrow Bold',Arial,sans-serif;letter-spacing:.015em;direction:ltr;text-align:start}
 .ch-title.ar{font-weight:900}
 .ch-story{color:#cfcdc7;font-size:16px;line-height:1.85;max-width:46ch;direction:ltr;text-align:start;font-family:Arial,sans-serif}
 .ch-format{margin-top:14px;color:var(--acc);font-weight:700;font-size:15px}
-.ch-cover{overflow:hidden;max-height:62svh}
-.ch-cover img{width:100%;height:100%;object-fit:cover}
-/* strip */
-.strip{overflow-x:auto;overflow-y:hidden;touch-action:pan-x pan-y;scrollbar-width:none;margin:6px -22px 26px;padding:0 22px}
-.strip::-webkit-scrollbar{display:none}
-.track{display:flex;gap:16px;width:max-content}
-.card{position:relative;height:34svh;flex:0 0 auto;overflow:hidden}
-.card img{height:100%;width:auto;max-width:none;-webkit-user-drag:none;user-select:none}
-.card figcaption{position:absolute;bottom:8px;left:8px;font:10px/1 Anton,Arial,sans-serif;letter-spacing:.2em;
+/* ---------- deck: stacked cards, manual swipe ---------- */
+.deck{position:relative;width:100%;max-width:660px;max-height:60svh;aspect-ratio:4/3.3;margin-inline:auto;direction:ltr}
+.dk-card{position:absolute;inset:0;overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;
+  background:radial-gradient(130% 130% at 50% 0%,rgba(var(--tint),.30),#0c0c0c 72%);
+  transition:transform .45s cubic-bezier(.25,.8,.3,1),opacity .45s}
+.dk-card.drag{cursor:grabbing;transition:none}
+.dk-card img{position:absolute;inset:0;width:100%;height:100%;padding:16px;object-fit:contain;-webkit-user-drag:none;user-select:none}
+.dk-card figcaption{position:absolute;bottom:10px;left:10px;z-index:2;font:11px/1 Anton,Arial,sans-serif;letter-spacing:.2em;
   background:rgba(0,0,0,.62);padding:5px 8px;border:1px solid var(--line)}
+.dk-next{position:absolute;top:50%;right:-14px;transform:translateY(-50%);z-index:60;width:46px;height:46px;border-radius:50%;
+  border:1px solid var(--line);background:rgba(10,10,10,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;animation:dkNudge 1.9s ease-in-out infinite}
+.dk-next svg{width:20px;height:20px;stroke:#e8e6e1;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+@keyframes dkNudge{50%{transform:translateY(-50%) translateX(6px)}}
+@media (prefers-reduced-motion:reduce){.dk-next{animation:none}.dk-card{transition:none}}
 /* ---------- marks ---------- */
 #marks .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;flex:1;align-content:center;padding:30px 0}
 .mark-cell{position:relative;aspect-ratio:4/3;overflow:hidden}
@@ -111,13 +128,13 @@ footer .m-v{font-weight:700;font-size:14px}
 @media (max-width:820px){
   nav{display:none}
   section{padding:84px 16px 26px}
-  .hero-word{font-size:26vw}
-  .ht-name{font-size:22vw}
-  .ht-kicker{letter-spacing:.18em;font-size:10px;gap:9px}
-  .ht-kicker i{width:22px}
+  .ht-name{font-size:15vw}
+  .hg-f1{width:130px;height:130px}
+  .hg-front{width:104px;height:104px;right:8%;top:16%}
+  .hg-ring{width:74svh;height:74svh}
   .ch-main{grid-template-columns:1fr;gap:20px}
-  .ch-cover{max-height:44svh}
-  .card{height:30svh}
+  .deck{max-height:46svh}
+  .dk-next{right:-6px;width:42px;height:42px}
   #marks .grid{grid-template-columns:repeat(2,1fr)}
   .meta-row{grid-template-columns:repeat(2,1fr);row-gap:16px}
   footer{grid-template-columns:repeat(2,1fr);row-gap:14px}
@@ -145,9 +162,23 @@ footer .m-v{font-weight:700;font-size:14px}
 <section id="cover" data-sec="01">
   <div class="rule-head rv"><span>(01) COVER</span><span style="direction:ltr">2026 / EDITION</span></div>
   <div class="hero-stage">
+    <div class="hero-geo" aria-hidden="true">
+      <span class="hg-orb hg-o1"></span>
+      <span class="hg-orb hg-o2"></span>
+      <span class="hg-ring"></span>
+      <span class="hg-frame hg-f1"></span>
+      <span class="hg-frame hg-f2"></span>
+      <span class="hg-frame hg-f3"></span>
+      <svg class="hg-threads" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-60 610 C 280 520, 560 730, 1260 545"/>
+        <path d="M-60 300 C 330 385, 720 215, 1260 340" class="t-a"/>
+        <path d="M-60 460 C 420 405, 780 565, 1260 430" class="t-b"/>
+      </svg>
+    </div>
     <div class="hero-type rv">
       <h1 class="ht-name"><span class="l1">مصطفى</span><span class="l2">نادي</span></h1>
     </div>
+    <span class="hg-front" aria-hidden="true"></span>
   </div>
 </section>
 
@@ -176,9 +207,17 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">Logo, color palette, and ad designs in warm yellow and brown.</p>
       <p class="ch-format">عرض تقديمي من سبع صفحات</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../p45-1-BWflV8Vv.jpg" width="2000" height="1125" alt="Burger Hub" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../p45-1-BWflV8Vv.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p45-2-C3rvq3K2.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p45-3-Kyxeo5nC.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p45-4-DEu4gOTe.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p45-5-DUrSvF_I.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p45-6-DRITUzNI.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p45-7-CfOlUjn_.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 7" loading="lazy" decoding="async"/><figcaption>+ 07</figcaption></figure>
+      <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
-  <div class="strip" dir="ltr" data-strip><div class="track"><figure class="card framed"><img data-src="../p45-1-BWflV8Vv.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../p45-2-C3rvq3K2.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../p45-3-Kyxeo5nC.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../p45-4-DEu4gOTe.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="../p45-5-DUrSvF_I.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../p45-6-DRITUzNI.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure><figure class="card framed"><img data-src="../p45-7-CfOlUjn_.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 7" loading="lazy" decoding="async"/><figcaption>+ 07</figcaption></figure><figure class="card framed"><img data-src="../p45-1-BWflV8Vv.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../p45-2-C3rvq3K2.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../p45-3-Kyxeo5nC.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../p45-4-DEu4gOTe.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="../p45-5-DUrSvF_I.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../p45-6-DRITUzNI.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure><figure class="card framed"><img data-src="../p45-7-CfOlUjn_.jpg" width="2000" height="1125" alt="Burger Hub، التصميم 7" loading="lazy" decoding="async"/><figcaption>+ 07</figcaption></figure></div></div>
   <div class="meta-row rv">
     <div><span class="m-l">PROJECT</span><span class="m-v">Burger Hub</span></div>
     <div><span class="m-l">CATEGORY</span><span class="m-v">هوية بصرية وسوشيال ميديا</span></div>
@@ -196,9 +235,19 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">Standalone posters mixing Arabic type, collage, and print layouts.</p>
       <p class="ch-format">بوسترات مستقلة</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../a02-RbpmAoOi.jpg" width="1600" height="1600" alt="بوسترات" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../a02-RbpmAoOi.jpg" width="1600" height="1600" alt="بوسترات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a01-CkfH0pll.jpg" width="1350" height="1080" alt="بوسترات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a33-DqPNkCgx.jpg" width="1350" height="1080" alt="بوسترات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a30-BxJp0spm.jpg" width="904" height="1280" alt="بوسترات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a34-BaZ3dZfm.jpg" width="1350" height="1080" alt="بوسترات، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a31-Dx4bWwwc.jpg" width="904" height="1280" alt="بوسترات، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a17-DWRwmdK_.jpg" width="1600" height="1142" alt="بوسترات، التصميم 7" loading="lazy" decoding="async"/><figcaption>+ 07</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a37-D8I5_30X.jpg" width="1600" height="981" alt="بوسترات، التصميم 8" loading="lazy" decoding="async"/><figcaption>+ 08</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a38-BlloTOAQ.jpg" width="904" height="1280" alt="بوسترات، التصميم 9" loading="lazy" decoding="async"/><figcaption>+ 09</figcaption></figure>
+      <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
-  <div class="strip" dir="ltr" data-strip><div class="track"><figure class="card framed"><img data-src="../a02-RbpmAoOi.jpg" width="1600" height="1600" alt="بوسترات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a01-CkfH0pll.jpg" width="1350" height="1080" alt="بوسترات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a33-DqPNkCgx.jpg" width="1350" height="1080" alt="بوسترات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a30-BxJp0spm.jpg" width="904" height="1280" alt="بوسترات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="../a34-BaZ3dZfm.jpg" width="1350" height="1080" alt="بوسترات، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../a31-Dx4bWwwc.jpg" width="904" height="1280" alt="بوسترات، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure><figure class="card framed"><img data-src="../a17-DWRwmdK_.jpg" width="1600" height="1142" alt="بوسترات، التصميم 7" loading="lazy" decoding="async"/><figcaption>+ 07</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a37-D8I5_30X.jpg" width="1600" height="981" alt="بوسترات، التصميم 8" loading="lazy" decoding="async"/><figcaption>+ 08</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a38-BlloTOAQ.jpg" width="904" height="1280" alt="بوسترات، التصميم 9" loading="lazy" decoding="async"/><figcaption>+ 09</figcaption></figure><figure class="card framed"><img data-src="../a02-RbpmAoOi.jpg" width="1600" height="1600" alt="بوسترات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a01-CkfH0pll.jpg" width="1350" height="1080" alt="بوسترات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a33-DqPNkCgx.jpg" width="1350" height="1080" alt="بوسترات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a30-BxJp0spm.jpg" width="904" height="1280" alt="بوسترات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="../a34-BaZ3dZfm.jpg" width="1350" height="1080" alt="بوسترات، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../a31-Dx4bWwwc.jpg" width="904" height="1280" alt="بوسترات، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure><figure class="card framed"><img data-src="../a17-DWRwmdK_.jpg" width="1600" height="1142" alt="بوسترات، التصميم 7" loading="lazy" decoding="async"/><figcaption>+ 07</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a37-D8I5_30X.jpg" width="1600" height="981" alt="بوسترات، التصميم 8" loading="lazy" decoding="async"/><figcaption>+ 08</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a38-BlloTOAQ.jpg" width="904" height="1280" alt="بوسترات، التصميم 9" loading="lazy" decoding="async"/><figcaption>+ 09</figcaption></figure></div></div>
   <div class="meta-row rv">
     <div><span class="m-l">PROJECT</span><span class="m-v">بوسترات</span></div>
     <div><span class="m-l">CATEGORY</span><span class="m-v">بوسترات وتجارب بصرية</span></div>
@@ -216,9 +265,16 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">Black and white logo applied to print, phone, and clothing.</p>
       <p class="ch-format">مجموعة تطبيقات للشعار</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../a22-CInR1_nE.jpg" width="1280" height="960" alt="Be Well, Be Free" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../a22-CInR1_nE.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a24-111wOjG7.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a28-Buz3Ih0F.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a26-CeX2zYpM.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a23-C4dNXwk-.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a25-CppSNzmr.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure>
+      <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
-  <div class="strip" dir="ltr" data-strip><div class="track"><figure class="card framed"><img data-src="../a22-CInR1_nE.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a24-111wOjG7.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a28-Buz3Ih0F.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a26-CeX2zYpM.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a23-C4dNXwk-.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a25-CppSNzmr.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure><figure class="card framed"><img data-src="../a22-CInR1_nE.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a24-111wOjG7.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a28-Buz3Ih0F.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a26-CeX2zYpM.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a23-C4dNXwk-.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a25-CppSNzmr.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure></div></div>
   <div class="meta-row rv">
     <div><span class="m-l">PROJECT</span><span class="m-v">Be Well, Be Free</span></div>
     <div><span class="m-l">CATEGORY</span><span class="m-v">شعار وتطبيقات بصرية</span></div>
@@ -236,9 +292,15 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">A set of standalone logos, symbols, and letter marks.</p>
       <p class="ch-format">شعارات مستقلة</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../a04-DyL0mo8n.jpg" width="1000" height="1000" alt="شعارات" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../a04-DyL0mo8n.jpg" width="1000" height="1000" alt="شعارات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a44-wRYIcVD8.jpg" width="1350" height="1080" alt="شعارات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a42-CfCaT0AY.jpg" width="1350" height="1080" alt="شعارات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a16-C4v1Qu2W.jpg" width="1024" height="1024" alt="شعارات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a40-XJKupfoi.jpg" width="1600" height="1142" alt="شعارات، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure>
+      <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
-  <div class="strip" dir="ltr" data-strip><div class="track"><figure class="card framed"><img data-src="../a04-DyL0mo8n.jpg" width="1000" height="1000" alt="شعارات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a44-wRYIcVD8.jpg" width="1350" height="1080" alt="شعارات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a42-CfCaT0AY.jpg" width="1350" height="1080" alt="شعارات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a16-C4v1Qu2W.jpg" width="1024" height="1024" alt="شعارات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a40-XJKupfoi.jpg" width="1600" height="1142" alt="شعارات، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../a04-DyL0mo8n.jpg" width="1000" height="1000" alt="شعارات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a44-wRYIcVD8.jpg" width="1350" height="1080" alt="شعارات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a42-CfCaT0AY.jpg" width="1350" height="1080" alt="شعارات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a16-C4v1Qu2W.jpg" width="1024" height="1024" alt="شعارات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a40-XJKupfoi.jpg" width="1600" height="1142" alt="شعارات، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../a04-DyL0mo8n.jpg" width="1000" height="1000" alt="شعارات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a44-wRYIcVD8.jpg" width="1350" height="1080" alt="شعارات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a42-CfCaT0AY.jpg" width="1350" height="1080" alt="شعارات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a16-C4v1Qu2W.jpg" width="1024" height="1024" alt="شعارات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a40-XJKupfoi.jpg" width="1600" height="1142" alt="شعارات، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../a04-DyL0mo8n.jpg" width="1000" height="1000" alt="شعارات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a44-wRYIcVD8.jpg" width="1350" height="1080" alt="شعارات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a42-CfCaT0AY.jpg" width="1350" height="1080" alt="شعارات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a16-C4v1Qu2W.jpg" width="1024" height="1024" alt="شعارات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a40-XJKupfoi.jpg" width="1600" height="1142" alt="شعارات، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure></div></div>
   <div class="meta-row rv">
     <div><span class="m-l">PROJECT</span><span class="m-v">شعارات</span></div>
     <div><span class="m-l">CATEGORY</span><span class="m-v">مجموعة شعارات</span></div>
@@ -256,9 +318,17 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">Seven awareness slides for kids with one color style and clear titles.</p>
       <p class="ch-format">كاروسيل من سبع شرائح</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../p46-1-BAdErb7N.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../p46-1-BAdErb7N.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p46-2-ByRH8O_i.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p46-3-aFHEF3sl.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p46-4-D18oYzFy.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p46-5-Dh9tHY46.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p46-6-DEraLM7H.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../p46-7-DEj0y0rb.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 7" loading="lazy" decoding="async"/><figcaption>+ 07</figcaption></figure>
+      <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
-  <div class="strip" dir="ltr" data-strip><div class="track"><figure class="card framed"><img data-src="../p46-1-BAdErb7N.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../p46-2-ByRH8O_i.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../p46-3-aFHEF3sl.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../p46-4-D18oYzFy.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="../p46-5-Dh9tHY46.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../p46-6-DEraLM7H.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure><figure class="card framed"><img data-src="../p46-7-DEj0y0rb.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 7" loading="lazy" decoding="async"/><figcaption>+ 07</figcaption></figure><figure class="card framed"><img data-src="../p46-1-BAdErb7N.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../p46-2-ByRH8O_i.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../p46-3-aFHEF3sl.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../p46-4-D18oYzFy.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="../p46-5-Dh9tHY46.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../p46-6-DEraLM7H.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure><figure class="card framed"><img data-src="../p46-7-DEj0y0rb.jpg" width="500" height="500" alt="كاروسيل توعوي للأطفال، التصميم 7" loading="lazy" decoding="async"/><figcaption>+ 07</figcaption></figure></div></div>
   <div class="meta-row rv">
     <div><span class="m-l">PROJECT</span><span class="m-v">كاروسيل توعوي للأطفال</span></div>
     <div><span class="m-l">CATEGORY</span><span class="m-v">كاروسيل توعوي</span></div>
@@ -276,9 +346,12 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">Curved-type logo in pink tones, plus a volunteer call post.</p>
       <p class="ch-format">شعار ومنشور</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../a03-C8en8lCx.jpg" width="1254" height="1254" alt="UltrasTherapy" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../a03-C8en8lCx.jpg" width="1254" height="1254" alt="UltrasTherapy، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a09-C1Jd3Jxv.jpg" width="1600" height="992" alt="UltrasTherapy، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
+      <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
-  <div class="strip" dir="ltr" data-strip><div class="track"><figure class="card framed"><img data-src="../a03-C8en8lCx.jpg" width="1254" height="1254" alt="UltrasTherapy، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a09-C1Jd3Jxv.jpg" width="1600" height="992" alt="UltrasTherapy، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a03-C8en8lCx.jpg" width="1254" height="1254" alt="UltrasTherapy، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a09-C1Jd3Jxv.jpg" width="1600" height="992" alt="UltrasTherapy، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a03-C8en8lCx.jpg" width="1254" height="1254" alt="UltrasTherapy، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a09-C1Jd3Jxv.jpg" width="1600" height="992" alt="UltrasTherapy، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a03-C8en8lCx.jpg" width="1254" height="1254" alt="UltrasTherapy، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a09-C1Jd3Jxv.jpg" width="1600" height="992" alt="UltrasTherapy، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a03-C8en8lCx.jpg" width="1254" height="1254" alt="UltrasTherapy، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a09-C1Jd3Jxv.jpg" width="1600" height="992" alt="UltrasTherapy، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a03-C8en8lCx.jpg" width="1254" height="1254" alt="UltrasTherapy، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a09-C1Jd3Jxv.jpg" width="1600" height="992" alt="UltrasTherapy، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure></div></div>
   <div class="meta-row rv">
     <div><span class="m-l">PROJECT</span><span class="m-v">UltrasTherapy</span></div>
     <div><span class="m-l">CATEGORY</span><span class="m-v">شعار وتصميم سوشيال ميديا</span></div>
@@ -296,9 +369,15 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">Welcome and congratulation designs for university, shown on print.</p>
       <p class="ch-format">أعمال مستقلة ضمن مجموعة جامعية</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../a05-DspDVDfn.jpg" width="1280" height="1280" alt="تصميمات جامعية" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../a05-DspDVDfn.jpg" width="1280" height="1280" alt="تصميمات جامعية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a18-BUEZRKuj.jpg" width="1050" height="1050" alt="تصميمات جامعية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a19-VtS6MWNE.jpg" width="1200" height="900" alt="تصميمات جامعية، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a35-BCWllhi2.jpg" width="960" height="1280" alt="تصميمات جامعية، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a20-CneEW5I2.jpg" width="1280" height="960" alt="تصميمات جامعية، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure>
+      <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
-  <div class="strip" dir="ltr" data-strip><div class="track"><figure class="card framed"><img data-src="../a05-DspDVDfn.jpg" width="1280" height="1280" alt="تصميمات جامعية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a18-BUEZRKuj.jpg" width="1050" height="1050" alt="تصميمات جامعية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a19-VtS6MWNE.jpg" width="1200" height="900" alt="تصميمات جامعية، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a35-BCWllhi2.jpg" width="960" height="1280" alt="تصميمات جامعية، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a20-CneEW5I2.jpg" width="1280" height="960" alt="تصميمات جامعية، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../a05-DspDVDfn.jpg" width="1280" height="1280" alt="تصميمات جامعية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a18-BUEZRKuj.jpg" width="1050" height="1050" alt="تصميمات جامعية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a19-VtS6MWNE.jpg" width="1200" height="900" alt="تصميمات جامعية، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a35-BCWllhi2.jpg" width="960" height="1280" alt="تصميمات جامعية، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a20-CneEW5I2.jpg" width="1280" height="960" alt="تصميمات جامعية، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../a05-DspDVDfn.jpg" width="1280" height="1280" alt="تصميمات جامعية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a18-BUEZRKuj.jpg" width="1050" height="1050" alt="تصميمات جامعية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a19-VtS6MWNE.jpg" width="1200" height="900" alt="تصميمات جامعية، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a35-BCWllhi2.jpg" width="960" height="1280" alt="تصميمات جامعية، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a20-CneEW5I2.jpg" width="1280" height="960" alt="تصميمات جامعية، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure><figure class="card framed"><img data-src="../a05-DspDVDfn.jpg" width="1280" height="1280" alt="تصميمات جامعية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a18-BUEZRKuj.jpg" width="1050" height="1050" alt="تصميمات جامعية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a19-VtS6MWNE.jpg" width="1200" height="900" alt="تصميمات جامعية، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="../a35-BCWllhi2.jpg" width="960" height="1280" alt="تصميمات جامعية، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a20-CneEW5I2.jpg" width="1280" height="960" alt="تصميمات جامعية، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure></div></div>
   <div class="meta-row rv">
     <div><span class="m-l">PROJECT</span><span class="m-v">تصميمات جامعية</span></div>
     <div><span class="m-l">CATEGORY</span><span class="m-v">مجموعة جامعية</span></div>
@@ -316,9 +395,12 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">A teaser and an announcement for the occasion, in two visual styles.</p>
       <p class="ch-format">تصميمان للمناسبة</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../a21-C3n-o7B3.jpg" width="1600" height="1142" alt="اليوم العالمي للعلاج الطبيعي" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../a21-C3n-o7B3.jpg" width="1600" height="1142" alt="اليوم العالمي للعلاج الطبيعي، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a06-DCfmrgbM.jpg" width="1254" height="1254" alt="اليوم العالمي للعلاج الطبيعي، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
+      <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
-  <div class="strip" dir="ltr" data-strip><div class="track"><figure class="card framed"><img data-src="../a21-C3n-o7B3.jpg" width="1600" height="1142" alt="اليوم العالمي للعلاج الطبيعي، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a06-DCfmrgbM.jpg" width="1254" height="1254" alt="اليوم العالمي للعلاج الطبيعي، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a21-C3n-o7B3.jpg" width="1600" height="1142" alt="اليوم العالمي للعلاج الطبيعي، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a06-DCfmrgbM.jpg" width="1254" height="1254" alt="اليوم العالمي للعلاج الطبيعي، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a21-C3n-o7B3.jpg" width="1600" height="1142" alt="اليوم العالمي للعلاج الطبيعي، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a06-DCfmrgbM.jpg" width="1254" height="1254" alt="اليوم العالمي للعلاج الطبيعي، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a21-C3n-o7B3.jpg" width="1600" height="1142" alt="اليوم العالمي للعلاج الطبيعي، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a06-DCfmrgbM.jpg" width="1254" height="1254" alt="اليوم العالمي للعلاج الطبيعي، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a21-C3n-o7B3.jpg" width="1600" height="1142" alt="اليوم العالمي للعلاج الطبيعي، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a06-DCfmrgbM.jpg" width="1254" height="1254" alt="اليوم العالمي للعلاج الطبيعي، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a21-C3n-o7B3.jpg" width="1600" height="1142" alt="اليوم العالمي للعلاج الطبيعي، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a06-DCfmrgbM.jpg" width="1254" height="1254" alt="اليوم العالمي للعلاج الطبيعي، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure></div></div>
   <div class="meta-row rv">
     <div><span class="m-l">PROJECT</span><span class="m-v">اليوم العالمي للعلاج الطبيعي</span></div>
     <div><span class="m-l">CATEGORY</span><span class="m-v">تشويق وإعلان مناسبة</span></div>
@@ -336,9 +418,14 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">Covers and posts built on clear titles and direct symbols.</p>
       <p class="ch-format">أعمال مستقلة</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../a39-Dp5b7muh.jpg" width="853" height="1280" alt="أغلفة ومنشورات" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../a39-Dp5b7muh.jpg" width="853" height="1280" alt="أغلفة ومنشورات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a32-DKysWhcy.jpg" width="1280" height="720" alt="أغلفة ومنشورات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a29-CkGb1xmQ.jpg" width="1000" height="1000" alt="أغلفة ومنشورات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a43-D0_kyB9t.jpg" width="1599" height="899" alt="أغلفة ومنشورات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure>
+      <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
-  <div class="strip" dir="ltr" data-strip><div class="track"><figure class="card framed"><img data-src="../a39-Dp5b7muh.jpg" width="853" height="1280" alt="أغلفة ومنشورات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a32-DKysWhcy.jpg" width="1280" height="720" alt="أغلفة ومنشورات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a29-CkGb1xmQ.jpg" width="1000" height="1000" alt="أغلفة ومنشورات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a43-D0_kyB9t.jpg" width="1599" height="899" alt="أغلفة ومنشورات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="../a39-Dp5b7muh.jpg" width="853" height="1280" alt="أغلفة ومنشورات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a32-DKysWhcy.jpg" width="1280" height="720" alt="أغلفة ومنشورات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a29-CkGb1xmQ.jpg" width="1000" height="1000" alt="أغلفة ومنشورات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a43-D0_kyB9t.jpg" width="1599" height="899" alt="أغلفة ومنشورات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="../a39-Dp5b7muh.jpg" width="853" height="1280" alt="أغلفة ومنشورات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a32-DKysWhcy.jpg" width="1280" height="720" alt="أغلفة ومنشورات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a29-CkGb1xmQ.jpg" width="1000" height="1000" alt="أغلفة ومنشورات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a43-D0_kyB9t.jpg" width="1599" height="899" alt="أغلفة ومنشورات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure><figure class="card framed"><img data-src="../a39-Dp5b7muh.jpg" width="853" height="1280" alt="أغلفة ومنشورات، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="../a32-DKysWhcy.jpg" width="1280" height="720" alt="أغلفة ومنشورات، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a29-CkGb1xmQ.jpg" width="1000" height="1000" alt="أغلفة ومنشورات، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a43-D0_kyB9t.jpg" width="1599" height="899" alt="أغلفة ومنشورات، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure></div></div>
   <div class="meta-row rv">
     <div><span class="m-l">PROJECT</span><span class="m-v">أغلفة ومنشورات</span></div>
     <div><span class="m-l">CATEGORY</span><span class="m-v">أغلفة ومنشورات</span></div>
@@ -356,9 +443,12 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">Medical posts with illustrations, clear labels, and simple layouts.</p>
       <p class="ch-format">تصميمات مستقلة</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../a07-ChCjGbl-.jpg" width="1600" height="839" alt="تصميمات طبية" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../a07-ChCjGbl-.jpg" width="1600" height="839" alt="تصميمات طبية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a36-D0V1NQUM.jpg" width="1127" height="1600" alt="تصميمات طبية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
+      <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
-  <div class="strip" dir="ltr" data-strip><div class="track"><figure class="card framed"><img data-src="../a07-ChCjGbl-.jpg" width="1600" height="839" alt="تصميمات طبية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a36-D0V1NQUM.jpg" width="1127" height="1600" alt="تصميمات طبية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a07-ChCjGbl-.jpg" width="1600" height="839" alt="تصميمات طبية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a36-D0V1NQUM.jpg" width="1127" height="1600" alt="تصميمات طبية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a07-ChCjGbl-.jpg" width="1600" height="839" alt="تصميمات طبية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a36-D0V1NQUM.jpg" width="1127" height="1600" alt="تصميمات طبية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a07-ChCjGbl-.jpg" width="1600" height="839" alt="تصميمات طبية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a36-D0V1NQUM.jpg" width="1127" height="1600" alt="تصميمات طبية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a07-ChCjGbl-.jpg" width="1600" height="839" alt="تصميمات طبية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a36-D0V1NQUM.jpg" width="1127" height="1600" alt="تصميمات طبية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a07-ChCjGbl-.jpg" width="1600" height="839" alt="تصميمات طبية، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a36-D0V1NQUM.jpg" width="1127" height="1600" alt="تصميمات طبية، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure></div></div>
   <div class="meta-row rv">
     <div><span class="m-l">PROJECT</span><span class="m-v">تصميمات طبية</span></div>
     <div><span class="m-l">CATEGORY</span><span class="m-v">تصميمات تعليمية وطبية</span></div>
@@ -376,9 +466,12 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">A lecture announcement and a Ramadan greeting in green tones.</p>
       <p class="ch-format">إعلان وتهنئة</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../a10-8uPhrc7M.jpg" width="1131" height="1599" alt="URI · لقاء وتهنئة" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../a10-8uPhrc7M.jpg" width="1131" height="1599" alt="URI · لقاء وتهنئة، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a08-BhFzU8L5.jpg" width="1000" height="1000" alt="URI · لقاء وتهنئة، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
+      <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
+    </div>
   </div>
-  <div class="strip" dir="ltr" data-strip><div class="track"><figure class="card framed"><img data-src="../a10-8uPhrc7M.jpg" width="1131" height="1599" alt="URI · لقاء وتهنئة، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a08-BhFzU8L5.jpg" width="1000" height="1000" alt="URI · لقاء وتهنئة، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a10-8uPhrc7M.jpg" width="1131" height="1599" alt="URI · لقاء وتهنئة، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a08-BhFzU8L5.jpg" width="1000" height="1000" alt="URI · لقاء وتهنئة، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a10-8uPhrc7M.jpg" width="1131" height="1599" alt="URI · لقاء وتهنئة، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a08-BhFzU8L5.jpg" width="1000" height="1000" alt="URI · لقاء وتهنئة، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a10-8uPhrc7M.jpg" width="1131" height="1599" alt="URI · لقاء وتهنئة، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a08-BhFzU8L5.jpg" width="1000" height="1000" alt="URI · لقاء وتهنئة، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a10-8uPhrc7M.jpg" width="1131" height="1599" alt="URI · لقاء وتهنئة، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a08-BhFzU8L5.jpg" width="1000" height="1000" alt="URI · لقاء وتهنئة، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure><figure class="card framed"><img data-src="../a10-8uPhrc7M.jpg" width="1131" height="1599" alt="URI · لقاء وتهنئة، التصميم 1" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure><figure class="card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a08-BhFzU8L5.jpg" width="1000" height="1000" alt="URI · لقاء وتهنئة، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure></div></div>
   <div class="meta-row rv">
     <div><span class="m-l">PROJECT</span><span class="m-v">URI · لقاء وتهنئة</span></div>
     <div><span class="m-l">CATEGORY</span><span class="m-v">إعلانات ومناسبات</span></div>
@@ -396,7 +489,9 @@ footer .m-v{font-weight:700;font-size:14px}
       <p class="ch-story">Lettering inside a golden crescent on a black background.</p>
       <p class="ch-format">تصميم مناسبة</p>
     </div>
-    <figure class="ch-cover framed rv"><img data-src="../a41-vynLfE4_.jpg" width="1600" height="1142" alt="تكوين رمضاني" loading="lazy" decoding="async"/></figure>
+    <div class="deck rv" data-deck>
+      <figure class="dk-card framed"><img data-src="../a41-vynLfE4_.jpg" width="1600" height="1142" alt="تكوين رمضاني" loading="lazy" decoding="async"/><figcaption>+ 01</figcaption></figure>
+    </div>
   </div>
   
   <div class="meta-row rv">
@@ -470,36 +565,70 @@ function onScroll(){
 var tick=false;
 addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(function(){onScroll();tick=false})}},{passive:true});
 onScroll();
-/* auto-scrolling strips with touch pause/resume */
-var reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
-var strips=Array.prototype.slice.call(document.querySelectorAll('[data-strip]'));
-strips.forEach(function(st){
-  st._hold=false;st._t=0;st._auto=false;st._drag=false;
-  st.addEventListener('dragstart',function(e){e.preventDefault()});
-  st.addEventListener('pointerdown',function(e){st._hold=true;if(e.pointerType==='mouse'){st._drag=true;st._sx=e.clientX;st._sl=st.scrollLeft;try{st.setPointerCapture(e.pointerId)}catch(_){}}},{passive:true});
-  st.addEventListener('pointermove',function(e){if(st._drag)st.scrollLeft=st._sl-(e.clientX-st._sx)},{passive:true});
-  addEventListener('pointerup',function(){st._hold=false;st._drag=false;st._t=Date.now()},{passive:true});
-  addEventListener('pointercancel',function(){st._hold=false;st._drag=false;st._t=Date.now()},{passive:true});
-  st.addEventListener('pointerenter',function(){st._hold=true},{passive:true});
-  st.addEventListener('pointerleave',function(){if(!st._drag){st._hold=false;st._t=Date.now()}},{passive:true});
-  st.addEventListener('scroll',function(){if(st._auto){st._auto=false;return}st._t=Date.now()},{passive:true});
-});
-if(!reduced&&strips.length){
-  var last=performance.now();
-  (function loop(now){
-    var dt=Math.min(50,now-last);last=now;
-    strips.forEach(function(st){
-      if(st._hold)return;
-      if(Date.now()-st._t<1400)return;
-      var half=st.scrollWidth/2;
-      if(half<=st.clientWidth)return;
-      st._auto=true;st.scrollLeft+=dt*0.035;
-      if(st.scrollLeft>=half){st._auto=true;st.scrollLeft-=half}
-    });
-    requestAnimationFrame(loop);
-  })(last);
+/* stacked-card decks: manual right swipe dismisses front card, arrow cue, no auto motion */
+var decks=Array.prototype.slice.call(document.querySelectorAll('[data-deck]'));
+function layoutDeck(d){
+  d._cards.forEach(function(c,i){
+    var t,o;
+    if(i===0){t='translate(0px,0px) rotate(0deg) scale(1)';o=1}
+    else if(i===1){t='translate(-14px,12px) rotate(-2.4deg) scale(.966)';o=1}
+    else if(i===2){t='translate(12px,22px) rotate(1.8deg) scale(.932)';o=1}
+    else{t='translate(0px,30px) rotate(0deg) scale(.9)';o=0}
+    c.style.transform=t;c.style.zIndex=d._cards.length-i+1;c.style.opacity=o;
+  });
 }
+function advanceDeck(d){
+  if(d._anim||d._cards.length<2)return;
+  d._anim=true;
+  var f=d._cards[0];
+  f.style.transition='transform .48s cubic-bezier(.3,.75,.35,1),opacity .48s';
+  f.style.transform='translate(135%,-8%) rotate(15deg)';
+  f.style.opacity='0';
+  setTimeout(function(){
+    f.style.transition='none';
+    f.style.transform='translate(0px,60px) rotate(0deg) scale(.9)';
+    d.appendChild(f);
+    d._cards.push(d._cards.shift());
+    void f.offsetWidth;
+    f.style.transition='';
+    layoutDeck(d);
+    d._anim=false;
+  },470);
+}
+decks.forEach(function(d){
+  d._cards=Array.prototype.slice.call(d.querySelectorAll('.dk-card'));
+  d._anim=false;d._drag=false;d._sx=0;d._dx=0;
+  layoutDeck(d);
+  d.addEventListener('dragstart',function(e){e.preventDefault()});
+  var nx=d.querySelector('.dk-next');
+  if(nx){nx.addEventListener('click',function(){advanceDeck(d)})}
+  d.addEventListener('pointerdown',function(e){
+    if(e.target.closest('.dk-next')||d._anim||d._cards.length<2)return;
+    d._drag=true;d._sx=e.clientX;d._dx=0;
+    d._cards[0].classList.add('drag');
+    try{d.setPointerCapture(e.pointerId)}catch(_){}
+  });
+  d.addEventListener('pointermove',function(e){
+    if(!d._drag)return;
+    var dx=e.clientX-d._sx;d._dx=dx;
+    var f=d._cards[0];
+    f.style.transform='translate('+dx+'px,'+(Math.abs(dx)*.05)+'px) rotate('+(dx*.05)+'deg)';
+  });
+  function end(){
+    if(!d._drag)return;d._drag=false;
+    var f=d._cards[0];f.classList.remove('drag');
+    var th=Math.min(110,d.clientWidth*.24);
+    if(d._dx>th){advanceDeck(d)}
+    else{
+      f.style.transition='transform .45s cubic-bezier(.25,.8,.3,1),opacity .45s';
+      f.style.transform='translate(0px,0px) rotate(0deg) scale(1)';f.style.opacity='1';
+      setTimeout(function(){f.style.transition=''},460);
+    }
+  }
+  d.addEventListener('pointerup',end);
+  d.addEventListener('pointercancel',end);
+});
 })();
 </script>
 </body>
-       </html>
+</html>
