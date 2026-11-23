@@ -582,7 +582,7 @@ function onScroll(){
 var tick=false;
 addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(function(){onScroll();tick=false})}},{passive:true});
 onScroll();
-/* stacked-card decks: manual left swipe dismisses front card, arrow cue, no auto motion */
+/* stacked-card decks: swipe right for the next design, swipe left to pull the previous one back; arrow cue, no auto motion */
 var decks=Array.prototype.slice.call(document.querySelectorAll('[data-deck]'));
 function layoutDeck(d){
   d._cards.forEach(function(c,i){
@@ -599,7 +599,7 @@ function advanceDeck(d){
   d._anim=true;
   var f=d._cards[0];
   f.style.transition='transform .48s cubic-bezier(.3,.75,.35,1),opacity .48s';
-  f.style.transform='translate(-135%,-8%) rotate(-15deg)';
+  f.style.transform='translate(135%,-8%) rotate(15deg)';
   f.style.opacity='0';
   setTimeout(function(){
     f.style.transition='none';
@@ -612,9 +612,26 @@ function advanceDeck(d){
     d._anim=false;
   },470);
 }
+function backDeck(d){
+  if(d._anim||d._cards.length<2)return;
+  d._anim=true;
+  var p=d._cards[d._cards.length-1];
+  d._cards.unshift(d._cards.pop());
+  d.insertBefore(p,d.firstChild);
+  p.style.zIndex=d._cards.length+2;
+  p.style.opacity='1';
+  p.style.transition='transform .48s cubic-bezier(.3,.75,.35,1)';
+  void p.offsetWidth;
+  p.style.transform='translate(0px,0px) rotate(0deg) scale(1)';
+  setTimeout(function(){
+    p.style.transition='';p.style.zIndex='';
+    layoutDeck(d);
+    d._anim=false;
+  },480);
+}
 decks.forEach(function(d){
   d._cards=Array.prototype.slice.call(d.querySelectorAll('.dk-card'));
-  d._anim=false;d._drag=false;d._sx=0;d._dx=0;
+  d._anim=false;d._drag=false;d._sx=0;d._dx=0;d._prev=null;
   layoutDeck(d);
   d.addEventListener('dragstart',function(e){e.preventDefault()});
   var nx=d.querySelector('.dk-next');
@@ -622,7 +639,7 @@ decks.forEach(function(d){
   d.addEventListener('pointerdown',function(e){
     d._px=e.clientX;d._py=e.clientY;
     if(e.target.closest('.dk-next')||d._anim||d._cards.length<2)return;
-    d._drag=true;d._sx=e.clientX;d._dx=0;
+    d._drag=true;d._sx=e.clientX;d._dx=0;d._prev=null;
     d._cards[0].classList.add('drag');
     try{d.setPointerCapture(e.pointerId)}catch(_){}
   });
@@ -630,14 +647,32 @@ decks.forEach(function(d){
     if(!d._drag)return;
     var dx=e.clientX-d._sx;d._dx=dx;
     var f=d._cards[0];
-    f.style.transform='translate('+dx+'px,'+(Math.abs(dx)*.05)+'px) rotate('+(dx*.05)+'deg)';
+    if(dx>=0){
+      if(d._prev){d._prev.style.transition='';d._prev.style.zIndex='';d._prev=null;layoutDeck(d)}
+      f.style.transform='translate('+dx+'px,'+(Math.abs(dx)*.05)+'px) rotate('+(dx*.05)+'deg)';
+    }else{
+      var p=d._cards[d._cards.length-1];
+      if(d._prev!==p){if(d._prev){d._prev.style.transition='';d._prev.style.zIndex=''}
+        d._prev=p;p.style.transition='none';p.style.zIndex='100';p.style.opacity='1';}
+      f.style.transform='translate(0px,0px) rotate(0deg) scale(1)';
+      var px=d.clientWidth+dx;
+      p.style.transform='translate('+px+'px,'+(Math.abs(dx)*.05)+'px) rotate('+(dx*.05)+'deg)';
+    }
   });
   function end(){
     if(!d._drag)return;d._drag=false;
     var f=d._cards[0];f.classList.remove('drag');
     var th=Math.min(110,d.clientWidth*.24);
-    if(d._dx<-th){advanceDeck(d)}
+    if(d._dx>th){
+      if(d._prev){d._prev.style.transition='';d._prev.style.zIndex='';d._prev=null}
+      advanceDeck(d);
+    }
+    else if(d._dx<-th){
+      d._prev=null;
+      backDeck(d);
+    }
     else{
+      if(d._prev){var pv=d._prev;d._prev=null;pv.style.transition='';pv.style.zIndex='';layoutDeck(d)}
       f.style.transition='transform .45s cubic-bezier(.25,.8,.3,1),opacity .45s';
       f.style.transform='translate(0px,0px) rotate(0deg) scale(1)';f.style.opacity='1';
       setTimeout(function(){f.style.transition=''},460);
