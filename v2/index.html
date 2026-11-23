@@ -65,9 +65,10 @@ section{position:relative;padding:96px 22px 40px;min-height:100svh;display:flex;
   transform:rotate(8deg);pointer-events:none;animation:fFloat2 10s ease-in-out infinite}
 @keyframes fFloat2{50%{transform:rotate(8deg) translateY(-10px)}}
 .hero-type{position:relative;z-index:2;text-align:center;padding:10px 0}
-.ht-name{margin:0;font-weight:900;font-size:clamp(52px,8.5vw,128px);line-height:1.15}
-.ht-name .l1{background:linear-gradient(180deg,#fff 25%,#8f8d88 95%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.ht-name .l2{color:#84827b;margin-inline-start:.32em}
+.ht-name{margin:0;font-weight:900;font-size:clamp(52px,8.5vw,128px);line-height:1.35;padding:.1em .3em;overflow:visible}
+.ht-name .l1{color:#f2f0ea}
+.ht-name .l2{color:#a29f97;margin-inline-start:.32em}
+.ht-name span{display:inline-block;padding:0 .12em;overflow:visible}
 @media (prefers-reduced-motion:reduce){.hg-orb,.hg-ring,.hg-frame,.hg-front{animation:none}}
 /* ---------- about ---------- */
 #about .ghost{position:absolute;top:120px;inset-inline:0;text-align:center;font-weight:900;
@@ -98,11 +99,11 @@ section{position:relative;padding:96px 22px 40px;min-height:100svh;display:flex;
 .dk-card img{position:absolute;inset:0;width:100%;height:100%;padding:16px;object-fit:contain;-webkit-user-drag:none;user-select:none}
 .dk-card figcaption{position:absolute;bottom:10px;left:10px;z-index:2;font:11px/1 Anton,Arial,sans-serif;letter-spacing:.2em;
   background:rgba(0,0,0,.62);padding:5px 8px;border:1px solid var(--line)}
-.dk-next{position:absolute;top:50%;right:-14px;transform:translateY(-50%);z-index:60;width:46px;height:46px;border-radius:50%;
+.dk-next{position:absolute;top:50%;right:-6px;transform:translateY(-50%);z-index:60;width:30px;height:30px;border-radius:50%;
   border:1px solid var(--line);background:rgba(10,10,10,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;animation:dkNudge 1.9s ease-in-out infinite}
-.dk-next svg{width:20px;height:20px;stroke:#e8e6e1;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-@keyframes dkNudge{50%{transform:translateY(-50%) translateX(6px)}}
+  display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;animation:dkNudge 2.8s ease-in-out infinite;transition:background .3s,transform .3s}
+.dk-next svg{width:13px;height:13px;stroke:#e8e6e1;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+@keyframes dkNudge{50%{transform:translateY(-50%) translateX(3px)}}
 @media (prefers-reduced-motion:reduce){.dk-next{animation:none}.dk-card{transition:none}}
 /* ---------- marks ---------- */
 #marks .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;flex:1;align-content:center;padding:30px 0}
@@ -184,9 +185,8 @@ footer .m-v{font-weight:700;font-size:14px}
 
 <section id="about" data-sec="02">
   <div class="rule-head rv"><span>(02) ABOUT</span><span class="rh-r">نبذة</span></div>
-  <div class="ghost" aria-hidden="true">مصطفى نادي</div>
   <div class="about-mid">
-    <h2 class="rv">مصطفى نادي</h2>
+    <h2 class="rv">مصمم جرافيك</h2>
     <p class="role rv">GRAPHIC DESIGNER</p>
     <p class="about-line rv" dir="ltr">Visual identities and social media design. Arabic type, bold layouts, and brands built to be remembered.</p>
     <div class="stats rv">
@@ -524,11 +524,9 @@ footer .m-v{font-weight:700;font-size:14px}
   <div class="mid">
     <div class="tnx rv">شكراً</div>
     <div class="tnx-sub rv">THANK YOU</div>
-    <div class="tnx-name rv">مصطفى نادي</div>
     <a class="tnx-tel rv" href="tel:+201146956932"><span>للتواصل</span><bdi dir="ltr">+20 114 695 6932</bdi></a>
   </div>
   <footer class="rv">
-    <div><span class="m-l">NAME</span><span class="m-v">مصطفى نادي</span></div>
     <div><span class="m-l">BASED IN</span><span class="m-v" style="direction:ltr;display:block;text-align:start">Egypt</span></div>
     <div><span class="m-l">FIELD</span><span class="m-v" style="direction:ltr;display:block;text-align:start">Graphic Design</span></div>
     <div><span class="m-l">EDITION</span><span class="m-v" style="direction:ltr;display:block;text-align:start">2026</span></div>
@@ -565,7 +563,7 @@ function onScroll(){
 var tick=false;
 addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(function(){onScroll();tick=false})}},{passive:true});
 onScroll();
-/* stacked-card decks: manual right swipe dismisses front card, arrow cue, no auto motion */
+/* stacked-card decks: manual left swipe dismisses front card, arrow cue, no auto motion */
 var decks=Array.prototype.slice.call(document.querySelectorAll('[data-deck]'));
 function layoutDeck(d){
   d._cards.forEach(function(c,i){
@@ -582,7 +580,7 @@ function advanceDeck(d){
   d._anim=true;
   var f=d._cards[0];
   f.style.transition='transform .48s cubic-bezier(.3,.75,.35,1),opacity .48s';
-  f.style.transform='translate(135%,-8%) rotate(15deg)';
+  f.style.transform='translate(-135%,-8%) rotate(-15deg)';
   f.style.opacity='0';
   setTimeout(function(){
     f.style.transition='none';
@@ -618,7 +616,7 @@ decks.forEach(function(d){
     if(!d._drag)return;d._drag=false;
     var f=d._cards[0];f.classList.remove('drag');
     var th=Math.min(110,d.clientWidth*.24);
-    if(d._dx>th){advanceDeck(d)}
+    if(d._dx<-th){advanceDeck(d)}
     else{
       f.style.transition='transform .45s cubic-bezier(.25,.8,.3,1),opacity .45s';
       f.style.transform='translate(0px,0px) rotate(0deg) scale(1)';f.style.opacity='1';
