@@ -144,6 +144,25 @@ footer .m-v{font-weight:700;font-size:14px}
   .rv{opacity:1;transform:none;filter:none;transition:none}
   html{scroll-behavior:auto}
 }
+
+/* ---------- artwork viewer: tap to enlarge, zoom in/out ---------- */
+.mark-cell{cursor:zoom-in}
+.viewer{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;
+  background:rgba(7,7,7,.94);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);direction:ltr}
+.viewer.open{display:flex}
+.viewer img{max-width:92vw;max-height:78svh;user-select:none;-webkit-user-drag:none;touch-action:none;
+  transform-origin:center center;cursor:grab;box-shadow:0 30px 90px rgba(0,0,0,.65)}
+.viewer img.drag{cursor:grabbing}
+.v-cap{position:absolute;top:16px;left:18px;color:#e8e6e1;font:11px/1.5 Anton,Arial,sans-serif;
+  letter-spacing:.14em;opacity:.65;max-width:56vw;direction:rtl;text-align:start;pointer-events:none}
+.v-btn{position:absolute;z-index:2;width:44px;height:44px;border-radius:50%;border:1px solid rgba(232,230,225,.28);
+  background:rgba(22,22,22,.72);color:#e8e6e1;font:20px/1 Arial,sans-serif;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background .2s;padding:0}
+.v-btn:hover{background:rgba(60,60,60,.85)}
+.v-close{top:14px;right:16px}
+.v-tools{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px;align-items:center;z-index:2}
+.v-tools .v-btn{position:static}
+.v-pct{color:#e8e6e1;font:12px/1 Anton,Arial,sans-serif;letter-spacing:.1em;min-width:52px;text-align:center;opacity:.8}
 </style>
 </head>
 <body>
@@ -270,7 +289,7 @@ footer .m-v{font-weight:700;font-size:14px}
       <figure class="dk-card framed"><img data-src="../a24-111wOjG7.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 2" loading="lazy" decoding="async"/><figcaption>+ 02</figcaption></figure>
       <figure class="dk-card framed"><img data-src="../a28-Buz3Ih0F.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 3" loading="lazy" decoding="async"/><figcaption>+ 03</figcaption></figure>
       <figure class="dk-card framed"><img data-src="../a26-CeX2zYpM.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 4" loading="lazy" decoding="async"/><figcaption>+ 04</figcaption></figure>
-      <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a23-C4dNXwk-.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure>
+      <figure class="dk-card framed"><img data-src="../a23-clear.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 5" loading="lazy" decoding="async"/><figcaption>+ 05</figcaption></figure>
       <figure class="dk-card framed"><img data-src="https://raw.githubusercontent.com/mostavanady/mostavanady.github.io/f0878ed767c7d504860d16c7075501796525c17e/a25-CppSNzmr.jpg" width="1280" height="960" alt="Be Well, Be Free، التصميم 6" loading="lazy" decoding="async"/><figcaption>+ 06</figcaption></figure>
       <button class="dk-next" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m-6-7 7 7-7 7"/></svg></button>
     </div>
@@ -601,6 +620,7 @@ decks.forEach(function(d){
   var nx=d.querySelector('.dk-next');
   if(nx){nx.addEventListener('click',function(){advanceDeck(d)})}
   d.addEventListener('pointerdown',function(e){
+    d._px=e.clientX;d._py=e.clientY;
     if(e.target.closest('.dk-next')||d._anim||d._cards.length<2)return;
     d._drag=true;d._sx=e.clientX;d._dx=0;
     d._cards[0].classList.add('drag');
@@ -625,6 +645,108 @@ decks.forEach(function(d){
   }
   d.addEventListener('pointerup',end);
   d.addEventListener('pointercancel',end);
+  d.addEventListener('click',function(e){
+    if(e.target.closest('.dk-next'))return;
+    if(d._px==null)return;
+    var mv=Math.max(Math.abs(e.clientX-d._px),Math.abs(e.clientY-d._py));
+    d._px=null;
+    if(mv>10)return;
+    var im=d._cards[0].querySelector('img');
+    if(im)openViewer(im);
+  });
+});
+document.querySelectorAll('.mark-cell').forEach(function(c){
+  c.addEventListener('click',function(){var im=c.querySelector('img');if(im)openViewer(im)});
+});
+
+/* artwork viewer: tap a card or mark to inspect it large; zoom in/out; closing returns to the same spot */
+var vw=document.createElement('div');vw.className='viewer';vw.setAttribute('role','dialog');vw.setAttribute('aria-label','معاينة التصميم');
+vw.innerHTML='<img alt=""/>'+
+  '<div class=\'v-cap\'></div>'+
+  '<button class=\'v-btn v-close\' type=\'button\' aria-label=\'إغلاق\'>&times;</button>'+
+  '<div class=\'v-tools\'>'+
+  '<button class=\'v-btn v-out\' type=\'button\' aria-label=\'تصغير\'>&minus;</button>'+
+  '<span class=\'v-pct\'>100%</span>'+
+  '<button class=\'v-btn v-in\' type=\'button\' aria-label=\'تكبير\'>+</button>'+
+  '</div>';
+document.body.appendChild(vw);
+var vImg=vw.querySelector('img'),vPct=vw.querySelector('.v-pct'),vCap=vw.querySelector('.v-cap');
+var vS=1,vX=0,vY=0;
+function vApply(){vImg.style.transform='translate('+vX+'px,'+vY+'px) scale('+vS+')';vPct.textContent=Math.round(vS*100)+'%'}
+function openViewer(im){
+  var src=im.currentSrc||im.src||im.getAttribute('data-src');
+  if(!src)return;
+  vImg.src=src;vImg.alt=im.alt||'';vCap.textContent=im.alt||'';
+  vS=1;vX=0;vY=0;vApply();
+  vw.classList.add('open');
+  document.documentElement.style.overflow='hidden';
+}
+function closeViewer(){vw.classList.remove('open');document.documentElement.style.overflow=''}
+function vCenter(){var r=vImg.getBoundingClientRect();return{x:(r.left+r.right)/2-vX,y:(r.top+r.bottom)/2-vY}}
+function zoomAt(px,py,f){
+  var ns=Math.min(6,Math.max(1,vS*f));if(ns===vS)return;
+  var c=vCenter();
+  vX=px-c.x-(px-c.x-vX)*(ns/vS);vY=py-c.y-(py-c.y-vY)*(ns/vS);vS=ns;
+  if(vS===1){vX=0;vY=0}
+  vApply();
+}
+vw.querySelector('.v-close').addEventListener('click',closeViewer);
+vw.querySelector('.v-in').addEventListener('click',function(){var c=vCenter();zoomAt(c.x+vX,c.y+vY,1.5)});
+vw.querySelector('.v-out').addEventListener('click',function(){var c=vCenter();zoomAt(c.x+vX,c.y+vY,1/1.5)});
+vw.addEventListener('click',function(e){if(e.target===vw)closeViewer()});
+addEventListener('keydown',function(e){
+  if(!vw.classList.contains('open'))return;
+  var c=vCenter();
+  if(e.key==='Escape')closeViewer();
+  else if(e.key==='+'||e.key==='=')zoomAt(c.x+vX,c.y+vY,1.5);
+  else if(e.key==='-')zoomAt(c.x+vX,c.y+vY,1/1.5);
+});
+vw.addEventListener('wheel',function(e){
+  if(!vw.classList.contains('open'))return;
+  e.preventDefault();
+  zoomAt(e.clientX,e.clientY,e.deltaY<0?1.18:1/1.18);
+},{passive:false});
+var vPts={},vPan=null,vPinch=null;
+vw.addEventListener('pointerdown',function(e){
+  if(e.target!==vImg&&e.target!==vw)return;
+  vPts[e.pointerId]={x:e.clientX,y:e.clientY};
+  var ids=Object.keys(vPts);
+  if(ids.length===1){vPan={x:e.clientX,y:e.clientY};vImg.classList.add('drag')}
+  else if(ids.length===2){
+    var a=vPts[ids[0]],b=vPts[ids[1]];
+    vPinch={d:Math.hypot(a.x-b.x,a.y-b.y),s:vS,x:vX,y:vY,mx:(a.x+b.x)/2,my:(a.y+b.y)/2};vPan=null;
+  }
+  try{vImg.setPointerCapture(e.pointerId)}catch(_){}
+});
+vw.addEventListener('pointermove',function(e){
+  if(!vPts[e.pointerId])return;
+  vPts[e.pointerId]={x:e.clientX,y:e.clientY};
+  var ids=Object.keys(vPts);
+  if(vPinch&&ids.length===2){
+    var a=vPts[ids[0]],b=vPts[ids[1]];
+    var d=Math.hypot(a.x-b.x,a.y-b.y),mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+    var ns=Math.min(6,Math.max(1,vPinch.s*(d/vPinch.d)));
+    var c=vCenter();
+    vX=mx-c.x-(vPinch.mx-c.x-vPinch.x)*(ns/vPinch.s);
+    vY=my-c.y-(vPinch.my-c.y-vPinch.y)*(ns/vPinch.s);
+    vS=ns;if(vS===1){vX=0;vY=0}
+    vApply();
+  }else if(vPan){
+    vX+=e.clientX-vPan.x;vY+=e.clientY-vPan.y;vPan={x:e.clientX,y:e.clientY};vApply();
+  }
+});
+function vEnd(e){
+  delete vPts[e.pointerId];
+  if(Object.keys(vPts).length<2)vPinch=null;
+  if(Object.keys(vPts).length===0){vPan=null;vImg.classList.remove('drag')}
+}
+vw.addEventListener('pointerup',vEnd);
+vw.addEventListener('pointercancel',vEnd);
+var vLastTap=0;
+vImg.addEventListener('click',function(e){
+  var n=Date.now();
+  if(e.detail>=2||n-vLastTap<320){vLastTap=0;zoomAt(e.clientX,e.clientY,vS>1?1/vS:2.5)}
+  else vLastTap=n;
 });
 })();
 </script>
